@@ -1,0 +1,44 @@
+[
+    {
+      "id": 1,
+      "name": "Beige Shirt",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "price": 29.99,
+      "picture": "https://imagescdn.thecollective.in/img/app/product/8/899861-11009513.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Leather Jacket",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "price": 99.99,
+      "picture": "https://www.angeljackets.com/uk/product_images/x/613/mens_black_leather_jacket__75924_zoom.webp"
+    },
+    {
+      "id": 3,
+      "name": "Denim Jacket",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "price": 39.99,
+      "picture": "https://m.media-amazon.com/images/I/819qZGI7NRL._AC_UY1000_.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Jeans",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "price": 24.99,
+        "picture": "https://lsco.scene7.com/is/image/lsco/A60810002-front-gstk?fmt=jpeg&qlt=70&resMode=sharp2&fit=crop,1&op_usm=0.6,0.6,8&wid=2000&hei=1840"
+      },
+      {
+        "id": 5,
+        "name": "Black Hoodie",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "price": 39.99,
+        "picture": "https://perplex.store/cdn/shop/files/1000084-ArmorHoodieBlack_01_bf22178f-324e-437f-af68-be4edd1f4a29.jpg?v=1728915678"
+      },
+      {
+        "id": 6,
+        "name": "Red T-Shirt",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "price": 19.99,
+        "picture": "https://contents.mediadecathlon.com/p2606947/k$1c9e0ffdefc3e67bdeabc82be7893e93/men-s-running-t-shirt-red-decathlon-8771124.jpg"
+      }
+  ]
