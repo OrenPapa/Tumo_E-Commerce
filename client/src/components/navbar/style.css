@@ -1,0 +1,26 @@
+.navbar {
+  height: 80px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: #fff;
+  user-select: none;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.navbar-right-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-count {
+  font-size: 1.5rem;
+}
