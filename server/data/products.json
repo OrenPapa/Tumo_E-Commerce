@@ -40,5 +40,19 @@
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "price": 19.99,
         "picture": "https://contents.mediadecathlon.com/p2606947/k$1c9e0ffdefc3e67bdeabc82be7893e93/men-s-running-t-shirt-red-decathlon-8771124.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Black Hat",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "price": 9.99,
+        "picture": " https://bocogear.com/wp-content/uploads/2017/11/902202_RunHat_Black_Front.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Coat",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "price": 99.99,
+        "picture": "https://www.net-a-porter.com/variants/images/1647597318356202/in/w2000_a3-4_q60.jpg"
       }
   ]
