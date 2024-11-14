@@ -1,36 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import Loader from "../../components/loader";
 import Footer from "../../components/footer";
-import "./style.css"; 
+import ShopContext from "../../context/shopContext";
+import "./style.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const { fetchProductById, addToCart, removeFromCart, cart } =
+    useContext(ShopContext);
   const [product, setProduct] = useState(null);
-  const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = fetch(`http://localhost:5000/api/products/${id}`)
-      .then((response) => response.json())
-      .then((data) => setProduct(data))
-      .catch((error) => console.error("Error fetching product:", error));
+    const fetchData = async () => {
+      const productData = await fetchProductById(id);
+      setProduct(productData);
+      setLoading(false);
+    };
+    fetchData();
+  }, [id, fetchProductById]);
 
-    const delay = new Promise((resolve) => setTimeout(resolve, 500));
-
-    Promise.all([fetchData, delay]).then(() => setLoading(false));
-  }, [id]);
+  const productInCart = cart.find((item) => item.id === parseInt(id));
+  const count = productInCart ? productInCart.qty : 0;
 
   const incrementCount = () => {
-    setCount(count + 1);
+    addToCart(product.id);
   };
 
   const decrementCount = () => {
-    if (count > 0) setCount(count - 1);
+    if (count > 0) removeFromCart(product.id);
   };
 
-  if (loading) return <Loader />;
+  if (loading || !product) return <Loader />;
 
   return (
     <>

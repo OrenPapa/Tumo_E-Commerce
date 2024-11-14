@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import ShopContext from "../../context/shopContext";
 import "./style.css";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  const [count, setCount] = useState(0);
+  const { addToCart, removeFromCart, cart } = useContext(ShopContext);
 
   const handleNavigation = () => {
     navigate(`/product/${product.id}`);
   };
 
   const incrementCount = () => {
-    setCount(count + 1);
+    addToCart(product.id);
   };
 
   const decrementCount = () => {
-    if (count > 0) setCount(count - 1);
+    removeFromCart(product.id);
   };
+
+  const productInCart = cart.find((item) => item.id === product.id);
+  const count = productInCart ? productInCart.qty : 0;
 
   return (
     <div className="product-card">
