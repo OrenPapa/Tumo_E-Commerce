@@ -10,8 +10,11 @@ export const ShopProvider = ({ children }) => {
   // State to store the list of products available in the shop
   const [products, setProducts] = useState([]);
 
-  // State to store items added to the shopping cart
-  const [cart, setCart] = useState([]);
+  // Initialize cart state from localStorage or default to an empty array
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
 
   // State to store detailed information about products in the cart
   const [cartProducts, setCartProducts] = useState([]);
@@ -25,10 +28,21 @@ export const ShopProvider = ({ children }) => {
    */
   const cartLength = cart.reduce((total, item) => total + item?.qty, 0);
 
+  /**
+   * Clears the cart state and removes it from localStorage
+   */
   const clearCart = () => {
     setCart([]);
     setCartProducts([]);
+    localStorage.removeItem("cart");
   };
+
+  /**
+   * useEffect to save the cart state to localStorage whenever it changes
+   */
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   // useEffect to load the list of products when the component mounts
   useEffect(() => {
