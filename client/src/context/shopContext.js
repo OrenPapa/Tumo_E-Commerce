@@ -19,6 +19,17 @@ export const ShopProvider = ({ children }) => {
   // State to manage loading status for asynchronous operations
   const [loading, setLoading] = useState(true);
 
+  /**
+   * Calculates the total quantity of items in the cart
+   * @returns {number} - The total quantity of all items in the cart
+   */
+  const cartLength = cart.reduce((total, item) => total + item?.qty, 0);
+
+  const clearCart = () => {
+    setCart([]);
+    setCartProducts([]);
+  };
+
   // useEffect to load the list of products when the component mounts
   useEffect(() => {
     fetchProducts();
@@ -121,10 +132,34 @@ export const ShopProvider = ({ children }) => {
   };
 
   /**
-   * Calculates the total quantity of items in the cart
-   * @returns {number} - The total quantity of all items in the cart
+   * Sends the cart data to the backend for checkout
+   * @returns {Promise<string>} - The success message from the backend
    */
-  const cartLength = cart.reduce((total, item) => total + item?.qty, 0);
+  const checkout = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/products/checkout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cart }), // Send the cart data to the backend
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Checkout failed");
+      }
+
+      const data = await response.json();
+      return data.message; // Return the success message
+    } catch (error) {
+      console.error("Error during checkout:", error);
+      throw error; // Re-throw the error for the caller to handle
+    }
+  };
 
   return (
     <ShopContext.Provider
@@ -138,6 +173,8 @@ export const ShopProvider = ({ children }) => {
         addToCart, // Function to add items to the cart or increase their quantity
         removeFromCart, // Function to remove items from the cart or decrease their quantity
         fetchCartProducts, // Function to fetch detailed information of all items in the cart
+        checkout, // Function to send the product selected to the backend to complete the checkout
+        clearCart, // Reset the Cart to an empty state
       }}
     >
       {children}

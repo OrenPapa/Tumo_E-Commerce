@@ -3,6 +3,7 @@ const {
   getProducts,
   getProduct,
   getProductsByIds,
+  checkout
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -15,5 +16,7 @@ router.get("/:id", getProduct);
 
 // Route for getting products by an array of IDs
 router.post("/by-ids", getProductsByIds);
+
+router.post("/checkout", checkout);
 
 module.exports = router;
