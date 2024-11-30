@@ -16,7 +16,7 @@ const getProduct = (req, res) => {
   }
 };
 
-// POST /products/by-ids - Returns products by an array of IDs
+// POST /products/by-ids - Returns products by an array of IDs. Expect a payload like this: { "ids": [1, 2, 3] }
 const getProductsByIds = (req, res) => {
   console.log("Request received at /by-ids with body:", req.body); // Add this line
   const { ids } = req.body; // Receive an array of IDs in the request body
@@ -34,6 +34,7 @@ const getProductsByIds = (req, res) => {
   res.json(selectedProducts);
 };
 
+// POST /products/checkout - Processes the checkout for the provided cart. Expect a payload like this: { "cart": [{ "id": 1, "qty": 2 }, { "id": 2, "qty": 1 }] }
 const checkout = (req, res) => {
   const { cart } = req.body; // Receive the cart array in the request body
 
@@ -50,5 +51,5 @@ module.exports = {
   getProducts,
   getProduct,
   getProductsByIds,
-  checkout
+  checkout,
 };
