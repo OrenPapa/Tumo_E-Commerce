@@ -1,4 +1,8 @@
-const { getAllProducts, getProductById } = require("../models/productModel");
+const {
+  getAllProducts,
+  getProductById,
+  saveProducts,
+} = require("../models/productModel");
 
 // GET /products - Returns all products
 const getProducts = (req, res) => {
@@ -47,9 +51,42 @@ const checkout = (req, res) => {
   res.json({ message: "Thank you for your purchase!" });
 };
 
+// POST /products - Adds a new product
+const addProduct = (req, res) => {
+  const { name, description, price, picture } = req.body;
+
+  // Validate the input
+  if (!name || !description || !price || !picture) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  // Load existing products
+  const products = getAllProducts();
+
+  // Create a new product
+  const newProduct = {
+    id: products.length > 0 ? products[products.length - 1].id + 1 : 1, // Generate a new ID
+    name,
+    description,
+    price: parseFloat(price), // Ensure the price is a number
+    picture,
+  };
+
+  // Add the new product to the list
+  products.push(newProduct);
+
+  // Save the updated product list back to the file
+  saveProducts(products);
+
+  res
+    .status(201)
+    .json({ message: "Product added successfully", product: newProduct });
+};
+
 module.exports = {
   getProducts,
   getProduct,
   getProductsByIds,
   checkout,
+  addProduct,
 };
