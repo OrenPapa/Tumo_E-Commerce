@@ -5,9 +5,11 @@ import Loader from "../../components/loader";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { products, loading } = useContext(ShopContext);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -21,6 +23,14 @@ const Home = () => {
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
+          </div>
+          <div className="button-container">
+            <button
+              className="add-product"
+              onClick={() => navigate("/add-product")}
+            >
+              Add Product
+            </button>
           </div>
         </div>
       )}

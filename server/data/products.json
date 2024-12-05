@@ -57,16 +57,16 @@
   },
   {
     "id": 9,
-    "name": "title",
-    "description": "test desc",
-    "price": 100,
+    "name": "Black shirt",
+    "description": "Test description",
+    "price": 200,
     "picture": "https://images.bestsellerclothing.in/data/selected/09-Aug-2023/213334601_g6.jpg?width=1080&height=1355&mode=fill&fill=blur&format=auto"
   },
   {
     "id": 10,
-    "name": "test",
-    "description": "desc",
-    "price": 100,
-    "picture": "https://images.bestsellerclothing.in/data/selected/09-Aug-2023/213334601_g6.jpg?width=1080&height=1355&mode=fill&fill=blur&format=auto"
+    "name": "Red Dress",
+    "description": "Short red dress",
+    "price": 70,
+    "picture": "https://img01.ztat.net/article/spp-media-p1/70c67513ae044eeeb220a3e03a8d8848/d91d970aa805496c90dbc45ca2a20067.jpg?imwidth=762&filter=packshot"
   }
 ]

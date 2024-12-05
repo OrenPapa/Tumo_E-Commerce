@@ -1,26 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import ShopContext from "../../context/shopContext";
+
+const initialState = {
+  name: "",
+  price: "",
+  picture: "",
+  description: "",
+};
 
 function AddProduct() {
-  // State for form inputs
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [picture, setPicture] = useState("");
-  const [description, setDescription] = useState("");
+  // State for form inputs as a single object
+  const [formState, setFormState] = useState(initialState);
   const navigate = useNavigate();
+  const { addProduct } = useContext(ShopContext);
 
   // State for feedback messages
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
+
+  // Handle input changes for all fields
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page refresh
 
     // Validate input
+    const { name, price, picture, description } = formState;
     if (!name || !price || !picture || !description) {
       setError("All fields are required");
       setMessage(null);
@@ -28,35 +44,17 @@ function AddProduct() {
     }
 
     try {
-      // Send POST request to backend
-      const response = await fetch("http://localhost:5000/api/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          price,
-          picture,
-          description,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Something went wrong");
-      }
+      // Call the addProduct function from the context
+      const successMessage = await addProduct(formState);
 
       // If successful, show success message
-      setMessage("Product added successfully!");
+      setMessage(successMessage);
       setError(null);
 
       // Clear form inputs
-      setName("");
-      setPrice("");
-      setPicture("");
-      setDescription("");
+      setFormState(initialState);
+
+      // Navigate back to the homepage
       navigate("/");
     } catch (err) {
       // Handle errors
@@ -69,31 +67,38 @@ function AddProduct() {
     <>
       <Navbar />
       <div className="add-product_container">
+        <h1 className="add-product-title">Add Product</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
+            name="name"
             placeholder="Product Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formState.name}
+            onChange={handleInputChange}
           />
           <input
             type="number"
+            name="price"
             placeholder="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            value={formState.price}
+            onChange={handleInputChange}
           />
           <input
             type="text"
+            name="picture"
             placeholder="Image URL"
-            value={picture}
-            onChange={(e) => setPicture(e.target.value)}
+            value={formState.picture}
+            onChange={handleInputChange}
           />
           <textarea
+            name="description"
             placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={formState.description}
+            onChange={handleInputChange}
           />
-          <button type="submit">Add Product</button>
+          <button className="submit-button" type="submit">
+            Add Product
+          </button>
         </form>
         {message && <p className="success-message">{message}</p>}
         {error && <p className="error-message">{error}</p>}

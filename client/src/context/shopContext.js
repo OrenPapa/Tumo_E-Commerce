@@ -175,6 +175,37 @@ export const ShopProvider = ({ children }) => {
     }
   };
 
+  /**
+   * Adds a new product to the backend and updates the local product state
+   * @param {Object} productData - The new product data to add
+   * @returns {Promise<string>} - The success message from the backend
+   */
+  const addProduct = async (productData) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to add product");
+      }
+
+      // Fetch the updated product list after adding a new product
+      await fetchProducts();
+
+      return data.message; // Return the success message
+    } catch (error) {
+      console.error("Error adding product:", error);
+      throw error; // Re-throw the error for the caller to handle
+    }
+  };
+
   return (
     <ShopContext.Provider
       value={{
@@ -189,6 +220,7 @@ export const ShopProvider = ({ children }) => {
         fetchCartProducts, // Function to fetch detailed information of all items in the cart
         checkout, // Function to send the product selected to the backend to complete the checkout
         clearCart, // Reset the Cart to an empty state
+        addProduct,
       }}
     >
       {children}

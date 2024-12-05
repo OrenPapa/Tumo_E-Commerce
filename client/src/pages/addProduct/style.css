@@ -8,6 +8,13 @@
   justify-content: center;
 }
 
+.add-product-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: white;
+}
+
 /* Form Styling */
 form {
   display: flex;
@@ -33,6 +40,7 @@ textarea {
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s ease;
+  resize: none;
 }
 
 /* Focus Effect for Inputs */
@@ -43,7 +51,7 @@ textarea:focus {
 }
 
 /* Button Styling */
-button {
+.submit-button {
   padding: 12px 16px;
   font-size: 16px;
   color: white;
