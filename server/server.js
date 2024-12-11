@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const productRoutes = require("./routes/productRoutes");
+const userRoutes = require("./routes/userRoutes"); // Import user routes
 const db = require("./utils/database");
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 // Start the server
 app.listen(port, () => {
