@@ -1,25 +1,55 @@
-const products = require("../data/products.json");
-const fs = require("fs");
-const path = require("path");
+const db = require("../utils/database");
 
-const productsFilePath = path.join(__dirname, "../data/products.json");
+// Fetch all products
+const getAllProducts = (callback) => {
+  const query = "SELECT id, name, description, price, picture FROM products";
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching products:", err);
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
 
-const getAllProducts = () => products;
+// Fetch a product by ID
+const getProductById = (id, callback) => {
+  const query =
+    "SELECT id, name, description, price, picture FROM products WHERE id = ?";
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error("Error fetching product:", err);
+      callback(err, null);
+    } else {
+      callback(null, results[0]); // Return the first matching product
+    }
+  });
+};
 
-const getProductById = (id) =>
-  products.find((product) => product.id === parseInt(id));
+// Add a new product
+const addProduct = (product, callback) => {
+  const query =
+    "INSERT INTO products (name, description, price, picture) VALUES (?, ?, ?, ?)";
+  const values = [
+    product.name,
+    product.description,
+    product.price,
+    product.picture,
+  ];
 
-// Save the updated products list to the JSON file
-const saveProducts = (products) => {
-  fs.writeFileSync(
-    productsFilePath,
-    JSON.stringify(products, null, 2),
-    "utf-8"
-  );
+  db.query(query, values, (err, results) => {
+    if (err) {
+      console.error("Error adding product:", err);
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
 };
 
 module.exports = {
   getAllProducts,
   getProductById,
-  saveProducts,
+  addProduct,
 };

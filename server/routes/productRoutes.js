@@ -4,7 +4,7 @@ const {
   getProduct,
   getProductsByIds,
   checkout,
-  addProduct,
+  addProductController,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -21,6 +21,6 @@ router.post("/by-ids", getProductsByIds);
 router.post("/checkout", checkout);
 
 // Route for adding a new product
-router.post("/", addProduct);
+router.post("/", addProductController);
 
 module.exports = router;
