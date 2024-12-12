@@ -7,7 +7,7 @@ const findUserByEmail = (email, callback) => {
     if (err) {
       callback(err, null);
     } else {
-      callback(null, results[0]); // Return the first matching user
+      callback(null, results[0]);
     }
   });
 };
