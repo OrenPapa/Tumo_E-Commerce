@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { fetchWithAuth } from "../helper/fetchWithAuth";
 
 // Create the context for the Shop, providing a way to access state and functions throughout the app
 const ShopContext = createContext();
@@ -55,7 +56,9 @@ export const ShopProvider = ({ children }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true); // Set loading state to true before fetching data
-      const response = await fetch("http://localhost:5000/api/products");
+      const response = await fetchWithAuth(
+        "http://localhost:5000/api/products"
+      );
       const data = await response.json();
       setProducts(data); // Update products state with the fetched data
       setLoading(false); // Set loading state to false after fetching data
@@ -71,7 +74,7 @@ export const ShopProvider = ({ children }) => {
   const fetchCartProducts = async () => {
     const ids = cart.map((item) => item.id); // Extract product IDs from the cart
     try {
-      const response = await fetch(
+      const response = await fetchWithAuth(
         "http://localhost:5000/api/products/by-ids",
         {
           method: "POST",
@@ -95,7 +98,9 @@ export const ShopProvider = ({ children }) => {
    */
   const fetchProductById = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`);
+      const response = await fetchWithAuth(
+        `http://localhost:5000/api/products/${id}`
+      );
       return await response.json();
     } catch (error) {
       console.error("Error fetching product:", error);
@@ -151,7 +156,7 @@ export const ShopProvider = ({ children }) => {
    */
   const checkout = async () => {
     try {
-      const response = await fetch(
+      const response = await fetchWithAuth(
         "http://localhost:5000/api/products/checkout",
         {
           method: "POST",
@@ -182,13 +187,16 @@ export const ShopProvider = ({ children }) => {
    */
   const addProduct = async (productData) => {
     try {
-      const response = await fetch("http://localhost:5000/api/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productData),
-      });
+      const response = await fetchWithAuth(
+        "http://localhost:5000/api/products",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productData),
+        }
+      );
 
       const data = await response.json();
 

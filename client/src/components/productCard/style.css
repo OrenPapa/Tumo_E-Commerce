@@ -11,6 +11,14 @@
   justify-content: space-between;
 }
 
+.product-card:active {
+  transform: scale(0.98);
+}
+
+.product-card:hover {
+  filter: brightness(1.1);
+}
+
 .product-card-content {
   padding: 16px;
   text-align: center;

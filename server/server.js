@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes"); // Import user routes
-const db = require("./utils/database");
 
 const app = express();
 const port = 5000;

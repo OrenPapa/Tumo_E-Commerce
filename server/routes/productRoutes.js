@@ -6,21 +6,23 @@ const {
   checkout,
   addProductController,
 } = require("../controllers/productController");
+const authenticateToken = require("../middleware/auth");
+const authorizeAdmin = require("../middleware/authorize");
 
 const router = express.Router();
 
 // Route for getting all products
-router.get("/", getProducts);
+router.get("/", authenticateToken, getProducts);
 
 // Route for getting a product by IDW
-router.get("/:id", getProduct);
+router.get("/:id", authenticateToken, getProduct);
 
 // Route for getting products by an array of IDs
-router.post("/by-ids", getProductsByIds);
+router.post("/by-ids", authenticateToken, getProductsByIds);
 
-router.post("/checkout", checkout);
+router.post("/checkout", authenticateToken, checkout);
 
 // Route for adding a new product
-router.post("/", addProductController);
+router.post("/", authenticateToken, authorizeAdmin, addProductController);
 
 module.exports = router;
